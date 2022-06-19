@@ -19,7 +19,7 @@ class Hangman {
    * */
   getRandomWord(difficulty) {
     return fetch(
-      `https://hangman-micro-service-bpblrjerwh.now.sh?difficulty=${difficulty}`
+      `https://hangman-micro-service.herokuapp.com/?difficulty=${difficulty}`
     )
       .then((r) => r.json())
       .then((r) => r.word);
@@ -32,11 +32,18 @@ class Hangman {
    */
   start(difficulty, next) {
     // get word and set it to the class's this.word
+    this.word = this.getRandomWord(difficulty);
+    next();
     // clear canvas
+    this.clearCanvas();
     // draw base
+    this.drawBase();
     // reset this.guesses to empty array
+    this.guesses = [];
     // reset this.isOver to false
+    this.isOver = false;
     // reset this.didWin to false
+    this.didWin = false;
   }
 
   /**
@@ -73,7 +80,7 @@ class Hangman {
    * i.e.: if the word is BOOK, and the letter O has been guessed, this would return _ O O _
    */
   getWordHolderText() {
-    return;
+    return `test`;
   }
 
   /**
@@ -83,7 +90,7 @@ class Hangman {
    * Hint: use the Array.prototype.join method.
    */
   getGuessesText() {
-    return ``;
+    return `test`;
   }
 
   /**
