@@ -35,7 +35,6 @@ class Hangman {
     this.promise = this.getRandomWord(difficulty);
     this.word = await this.promise;
     console.log(this.word);
-    next();
     // clear canvas
     this.clearCanvas();
     // draw base
@@ -46,6 +45,7 @@ class Hangman {
     this.isOver = false;
     // reset this.didWin to false
     this.didWin = false;
+    next();
   }
 
   /**
@@ -190,7 +190,16 @@ class Hangman {
    * i.e.: if the word is BOOK, and the letter O has been guessed, this would return _ O O _
    */
   getWordHolderText() {
-    return `test`;
+    let message = '';
+    for (let i = 0; i <= this.word.length-1; i++) {
+      let currentLetter = this.word.at(i);
+      if (this.guesses.includes(currentLetter)) {
+        message += `${currentLetter} `;
+      } else {
+        message += `_ `;
+      }
+    }
+    return message;
   }
 
   /**
@@ -200,7 +209,8 @@ class Hangman {
    * Hint: use the Array.prototype.join method.
    */
   getGuessesText() {
-    return `test`;
+    let message = `Guesses: ${this.guesses.join(', ')}`;
+    return message;
   }
 
   /**
