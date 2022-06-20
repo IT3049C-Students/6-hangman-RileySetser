@@ -61,6 +61,7 @@ class Hangman {
 
     // Check if nothing was provided and throw an error if so
     if (!letter) {
+      alert("There is no letter. Please input a letter.")
       throw "There is no letter. Please input a letter."
     }
     console.log("there is something there");
@@ -73,6 +74,7 @@ class Hangman {
     for (const letters of splitLetters) {
       console.log(letters);
       if (!alphabet.includes(letters)) {
+        alert("Please enter in a letter.")
         throw "Please enter in a letter.";
       }
     }
@@ -81,6 +83,7 @@ class Hangman {
 
     // Check if more than one letter was provided. throw an error if it is.
     if (splitLetters.length > 1) {
+      alert("Please enter only ONE letter.")
       throw "Please enter only ONE letter."
     }
     console.log("and there is only one letter.");
@@ -90,11 +93,13 @@ class Hangman {
 
     // check if this.guesses includes the letter. Throw an error if it has been guessed already.
     if (this.guesses.includes(lowerCased)) {
+      alert("You already guessed this letter.")
       throw "You already guessed this letter.";
     } else {
       this.guesses.push(lowerCased);
     }
     console.log("this letter has not yet been guessed.")
+    console.log(this.guesses);
 
     // add the new letter to the guesses array.
     if (this.word.includes(lowerCased)) {
@@ -111,12 +116,18 @@ class Hangman {
 
   checkWin() {
     let splitWord = this.word.split('');
+    console.log(splitWord);
     let unknown = 0;
-    for (const letter in splitWord) {
-      if (!this.guesses.includes(letter)) {
+    let currentLetter;
+    for (let i = 0; i <= this.word.length-1; i++) {
+      currentLetter = this.word.at(i);
+      console.log(currentLetter);
+      if (!this.guesses.includes(currentLetter)) {
+
         unknown++;
       }
     }
+    console.log(unknown);
 
     if (unknown === 0) {
       this.didWin = true;
@@ -134,29 +145,39 @@ class Hangman {
   onWrongGuess() {
     let wrongGuesses = 0;
     let splitWord = this.word.split('');
-    for (const letter in splitWord) {
-      if (!this.guesses.includes(letter)) {
+    let currentLetter;
+    console.log(splitWord);
+    for (const guess in this.guesses) {
+      currentLetter = this.guesses.at(guess);
+      if (!this.word.includes(currentLetter)) {
         wrongGuesses++;
       }
     }
+    console.log(wrongGuesses);
     switch (wrongGuesses) {
       case 1:
         this.drawHead();
+        console.log("wrong guess 1")
         break;
       case 2:
         this.drawBody();
+        console.log("wrong guess 2")
         break;
       case 3:
         this.drawRightArm();
+        console.log("wrong guess 3")
         break;
       case 4:
         this.drawLeftArm();
+        console.log("wrong guess 4")
         break;
       case 5:
         this.drawRightLeg();
+        console.log("wrong guess 5")
         break;
       case 6:
         this.drawLeftLeg();
+        console.log("wrong guess 6")
         this.isOver = true;
         this.didWin = false;
         break;
