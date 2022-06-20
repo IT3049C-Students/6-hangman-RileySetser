@@ -230,7 +230,11 @@ class Hangman {
     this.ctx.fillRect(10, 410, 175, 10); // Base
   }
 
-  drawHead() {}
+  drawHead() {
+    this.ctx.beginPath();
+    this.ctx.arc(250, 96, 38, 0, 2*Math.PI);
+    this.ctx.stroke();
+  }
 
   drawBody() {}
 
