@@ -236,13 +236,38 @@ class Hangman {
     this.ctx.stroke();
   }
 
-  drawBody() {}
+  drawBody() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(250, 134);
+    this.ctx.lineTo(250, 233);
+    this.ctx.stroke();
+  }
 
-  drawLeftArm() {}
+  drawLeftArm() {
+    this.ctx.beginPath()
+    this.ctx.moveTo(250, 134);
+    this.ctx.lineTo(204, 213);
+    this.ctx.stroke();
+  }
 
-  drawRightArm() {}
+  drawRightArm() {
+    this.ctx.beginPath()
+    this.ctx.moveTo(250, 134);
+    this.ctx.lineTo(296, 213);
+    this.ctx.stroke();
+  }
 
-  drawLeftLeg() {}
+  drawLeftLeg() {
+    this.ctx.beginPath()
+    this.ctx.moveTo(250, 233);
+    this.ctx.lineTo(225, 323);
+    this.ctx.stroke();
+  }
 
-  drawRightLeg() {}
+  drawRightLeg() {
+    this.ctx.beginPath()
+    this.ctx.moveTo(250, 233);
+    this.ctx.lineTo(275, 323);
+    this.ctx.stroke();
+  }
 }
