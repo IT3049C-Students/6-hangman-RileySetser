@@ -51,9 +51,37 @@ class Hangman {
    * @param {string} letter the guessed letter.
    */
   guess(letter) {
+    const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    console.log(letter);
+    //(STUDENT'S COMMENTS)
+    //creating a string that contains the alphabet, both uppercase and lowercase, used to detect numbers and symbols.
+    console.log(alphabet);
+
     // Check if nothing was provided and throw an error if so
+    if (!letter) {
+      throw "There is no letter. Please input a letter."
+    }
+    console.log("there is something there");
+
     // Check for invalid cases (numbers, symbols, ...) throw an error if it is
+
+    let splitLetters = letter.split('');
+    console.log(splitLetters);
+
+    for (const letters of splitLetters) {
+      console.log(letters);
+      if (!alphabet.includes(letters)) {
+        throw "Please enter in a letter.";
+      }
+    }
+
+    console.log("it is a letter");
+
     // Check if more than one letter was provided. throw an error if it is.
+    if (splitLetters.length > 1) {
+      throw "Please enter only ONE letter."
+    }
+    console.log("and there is only one letter.");
     // if it's a letter, convert it to lower case for consistency.
     // check if this.guesses includes the letter. Throw an error if it has been guessed already.
     // add the new letter to the guesses array.
