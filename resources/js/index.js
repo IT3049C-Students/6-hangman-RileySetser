@@ -11,6 +11,7 @@ const wordHolderText = document.getElementById(`wordHolder`);
 // GUESSING FORM
 const guessForm = document.getElementById(`guessForm`);
 const guessInput = document.getElementById(`guessInput`);
+const guessButton = document.getElementById(`guessSubmitButton`)
 
 // GAME RESET BUTTON
 const resetGame = document.getElementById(`resetGame`);
@@ -33,9 +34,9 @@ try {
   difficultySelectForm.addEventListener(`submit`, function (event) {
     event.preventDefault();
     game.start(difficultySelect.value, function() {
-      startWrapper.setAttribute('hidden', 'true');
+      startWrapper.classList.add('hidden');
       gameWrapper.classList.remove('hidden');
-      wordHolderText.textContent = game.getGuessesText();
+      wordHolderText.textContent = game.getWordHolderText();
       guessesText.textContent = game.getGuessesText();
     })
   });
@@ -53,12 +54,29 @@ try {
   //      2. disable the guessButton
   //      3. show the resetGame button
   // if the game is won or lost, show an alert.
-  guessForm.addEventListener(`submit`, function (e) {});
+  guessForm.addEventListener(`submit`, function (e) {
+    e.preventDefault();
+    let userGuess = guessInput.value;
+    game.guess(userGuess);
+    wordHolderText.textContent = game.getWordHolderText();
+    guessesText.textContent = game.getGuessesText();
+    guessInput.value = '';
+
+    if (game.isOver) {
+      guessInput.setAttribute('disabled', 'true');
+      guessButton.setAttribute('disabled', 'true');
+      resetGame.classList.remove('hidden');
+    }
+  });
 
   // add a click Event Listener to the resetGame button
   //    show the startWrapper
   //    hide the gameWrapper
-  resetGame.addEventListener(`click`, function (e) {});
+  resetGame.addEventListener(`click`, function (e) {
+    gameWrapper.classList.add('hidden');
+    resetGame.classList.add('hidden');
+    startWrapper.classList.remove('hidden');
+  });
 } catch (error) {
   console.error(error);
   alert(error);
