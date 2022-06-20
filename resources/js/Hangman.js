@@ -30,9 +30,11 @@ class Hangman {
    * @param {string} difficulty a difficulty string to be passed to the getRandomWord Function
    * @param {function} next callback function to be called after a word is reveived from the API.
    */
-  start(difficulty, next) {
+  async start(difficulty, next) {
     // get word and set it to the class's this.word
-    this.word = this.getRandomWord(difficulty);
+    this.promise = this.getRandomWord(difficulty);
+    this.word = await this.promise;
+    console.log(this.word);
     next();
     // clear canvas
     this.clearCanvas();
@@ -82,9 +84,26 @@ class Hangman {
       throw "Please enter only ONE letter."
     }
     console.log("and there is only one letter.");
+
     // if it's a letter, convert it to lower case for consistency.
+    let lowerCased = letter.toLowerCase();
+
     // check if this.guesses includes the letter. Throw an error if it has been guessed already.
+    if (this.guesses.includes(lowerCased)) {
+      throw "You already guessed this letter.";
+    } else {
+      this.guesses.push(lowerCased);
+    }
+    console.log("this letter has not yet been guessed.")
+
     // add the new letter to the guesses array.
+    if (this.word.includes(lowerCased)) {
+      this.checkWin();
+      console.log('the word does contain this letter');
+    } else {
+      this.onWrongGuess();
+      console.log('the word does not contain this letter');
+    }
     // check if the word includes the guessed letter:
     //    if it's is call checkWin()
     //    if it's not call onWrongGuess()

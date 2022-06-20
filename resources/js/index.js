@@ -23,7 +23,6 @@ try {
   // Instantiate a game Object using the Hangman class.
   let game = new Hangman(canvas);
 
-  console.log(game.guess('S'));
   // add a submit Event Listener for the to the difficultySelectionForm
   //    get the difficulty input
   //    call the game start() method, the callback function should do the following
