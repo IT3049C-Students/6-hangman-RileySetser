@@ -63,6 +63,11 @@ try {
     guessInput.value = '';
 
     if (game.isOver) {
+      if (game.didWin) {
+        alert('You Win!');
+      } else {
+        alert('You Lost!');
+      }
       guessInput.setAttribute('disabled', 'true');
       guessButton.setAttribute('disabled', 'true');
       resetGame.classList.remove('hidden');
@@ -76,6 +81,8 @@ try {
     gameWrapper.classList.add('hidden');
     resetGame.classList.add('hidden');
     startWrapper.classList.remove('hidden');
+    guessInput.removeAttribute('disabled');
+    guessButton.removeAttribute('disabled');
   });
 } catch (error) {
   console.error(error);
